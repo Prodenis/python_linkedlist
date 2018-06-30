@@ -3,6 +3,7 @@ class Node:
         self.value = v
         self.next = None
 
+
 class LinkedList:
     def __init__(self):
         self.head = None
@@ -29,7 +30,8 @@ class LinkedList:
             node = node.next
         return None
 
-    def remove(self,val):
+    # 1.1
+    def remove(self, val):
         current = self.head
         previous = None
         while current != None:
@@ -47,7 +49,8 @@ class LinkedList:
             current = current.next
         return False
 
-    def remove_all(self,val):
+    # 1.2
+    def remove_all(self, val):
         current = self.head
         previous = None
         while current != None:
@@ -64,7 +67,8 @@ class LinkedList:
             previous = current
             current = current.next
 
-    def search(self,val):
+    # 1.4
+    def search(self, val):
         current = self.head
         list = []
         while current != None:
@@ -73,17 +77,21 @@ class LinkedList:
             current = current.next
         return print(list)
 
+    # 1.3
     def clear(self):
         self.__init__()
 
-    def sum_all(self):
+    # 1.5
+    def length_list(self):
         node = self.head
         sum = 0
         while node != None:
+            print(sum)
             sum += 1
             node = node.next
         return sum
 
+    # 1.6
     def insert(self, item, item_after):
         current = self.head
         while current != None:
@@ -92,8 +100,7 @@ class LinkedList:
                 current.next = item
             current = current.next
 
-
-
+# 1.7
 def compare(list_one, list_two):
     count_one = 0
     count_two = 0
@@ -114,6 +121,9 @@ def compare(list_one, list_two):
             current_one = current_one.next
             current_two = current_two.next
         return ss_list.print_all_nodes()
+    else:
+        return False
+
 
 
 
