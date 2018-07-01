@@ -22,6 +22,14 @@ class LinkedList:
             print(node.value)
             node = node.next
 
+    def list_test(self):
+        node = self.head
+        list = []
+        while node != None:
+            list.append(node.value)
+            node = node.next
+        return list
+
     def find(self, val):
         node = self.head
         while node is not None:
@@ -75,7 +83,7 @@ class LinkedList:
             if current.value == val:
                 list.append(current)
             current = current.next
-        return print(list)
+        return list
 
     # 1.3
     def clear(self):
@@ -98,6 +106,7 @@ class LinkedList:
             if current.value == item_after.value:
                 item.next = current.next
                 current.next = item
+                return
             current = current.next
 
 # 1.7
