@@ -50,10 +50,11 @@ class LinkedList2:
         current = self.head
         while current != None:
             if current.value == node_before.value:
-                node.next = current.next
-                node.prev = current.prev
+                node.prev = current
                 current.next = node
-                return
+                node.next = current.next.prev
+                current.next.prev = node
+                return True
             current = current.next
 
     # 2.1
@@ -85,9 +86,9 @@ n2.prev = n1
 s_list = LinkedList2()
 s_list.add_in_tail(n1)
 s_list.add_in_tail(n2)
-#s_list.add_in_head(Node2(20))
-#s_list.add_in_head(Node2(40))
+s_list.add_in_head(Node2(20))
+s_list.add_in_tail(Node2(40))
 #s_list.add_in_head(Node2(50))
-#s_list.insert(Node2(24), Node2(12))
-s_list.remove(12)
+s_list.insert(Node2(24), Node2(20))
+#s_list.remove(12)
 s_list.print_all_nodes()
