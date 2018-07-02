@@ -50,9 +50,10 @@ class LinkedList2:
         current = self.head
         while current != None:
             if current.value == node_before.value:
+                old_current_next = current.next
                 node.prev = current
                 current.next = node
-                node.next = current.next.prev
+                node.next = old_current_next
                 current.next.prev = node
                 return True
             current = current.next
