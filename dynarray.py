@@ -32,26 +32,37 @@ class DynArray:
         self.array[self.count] = itm
         self.count += 1
 
+    def test_list(self):
+        list = []
+        for i in range(self.count):
+            list.append(self.array[i])
+        return list
+
     def insert(self, i, itm):
         for j in range(self.count):
             if j == i:
                 old = self.array[j]
                 self.array[j] = itm
                 for j in range(i, self.count):
-                    print(j)
-                    #print(old)
+                    if self.array[j] == self.array[self.count - 1]:
+                        self.resize(2 * self.capacity)
+                        self.array[self.count] = old
+                        self.count += 1
+                        return
                     old2 = self.array[j + 1]
-                    #print(old2)
                     self.array[j+1] = old
                     old = old2
                 return
 
-da = DynArray()
-for i in range(10):
-    da.append(i)
-    #print(da[i])
+    def delete(self, i):
+        for j in range(self.count):
+            if j == i:
+                for j in range(self.count - (self.count - i), self.count):
+                    self.array[j] = self.array[j + 1]
+                    if self.array[j] == self.array[self.count - 1]:
+                        self.count -= 1
+                        if self.count / self.capacity >= 2 and self.count > 16:
+                            self.resize(self.capacity / 2)
+                        return
 
-da.insert(2, 100)
 
-for i in range(da.__len__()):
-    print(da[i])
