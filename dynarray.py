@@ -39,30 +39,40 @@ class DynArray:
         return list
 
     def insert(self, i, itm):
-        for j in range(self.count):
-            if j == i:
-                old = self.array[j]
-                self.array[j] = itm
-                for j in range(i, self.count):
-                    if self.array[j] == self.array[self.count - 1]:
-                        self.resize(2 * self.capacity)
-                        self.array[self.count] = old
-                        self.count += 1
-                        return
-                    old2 = self.array[j + 1]
-                    self.array[j+1] = old
-                    old = old2
-                return
+        if self.array[i]:
+            old = self.array[i]
+            self.array[i] = itm
+            for j in range(i, self.count):
+                if self.array[j] == self.array[self.count - 1]:
+                    self.resize(2 * self.capacity)
+                    self.array[self.count] = old
+                    self.count += 1
+                    return
+                old2 = self.array[j + 1]
+                self.array[j+1] = old
+                old = old2
+            return
 
     def delete(self, i):
-        for j in range(self.count):
-            if j == i:
-                for j in range(self.count - (self.count - i), self.count):
-                    self.array[j] = self.array[j + 1]
-                    if self.array[j] == self.array[self.count - 1]:
-                        self.count -= 1
-                        if self.count / self.capacity >= 2 and self.count > 16:
-                            self.resize(self.capacity / 2)
-                        return
+        if self.array[i]:
+            for j in range(self.count - (self.count - i), self.count):
+                self.array[j] = self.array[j + 1]
+                if self.array[j] == self.array[self.count - 1]:
+                    self.count -= 1
+                    if self.count / self.capacity >= 2 and self.count > 16:
+                        self.resize(self.capacity / 2)
+                    return
 
 
+
+
+da = DynArray()
+for i in range(10):
+    da.append(i)
+    #print(da[i])
+
+
+#da.delete(1)
+da.insert(4, 7)
+
+print(da.test_list())
