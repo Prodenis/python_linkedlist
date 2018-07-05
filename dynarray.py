@@ -42,7 +42,7 @@ class DynArray:
         if self.array[i]:
             if self.count == self.capacity:
                 self.resize(2 * self.capacity)
-            for j in range(i, self.count):
+            for j in reversed(range(i, self.count)):
                 self.array[j] = self.array[j - 1]
                 if j == i:
                     self.array[j] = itm
@@ -50,10 +50,10 @@ class DynArray:
 
     def delete(self, i):
         if self.array[i]:
+            if self.count / self.capacity >= 2 and self.count > 16:
+                self.resize(self.capacity / 2)
             for j in range(self.count - (self.count - i), self.count):
                 self.array[j] = self.array[j + 1]
                 if self.array[j] == self.array[self.count - 1]:
                     self.count -= 1
-                    if self.count / self.capacity >= 2 and self.count > 16:
-                        self.resize(self.capacity / 2)
                     return
