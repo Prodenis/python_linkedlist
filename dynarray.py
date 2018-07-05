@@ -40,19 +40,13 @@ class DynArray:
 
     def insert(self, i, itm):
         if self.array[i]:
-            old = self.array[i]
-            self.array[i] = itm
+            if self.count == self.capacity:
+                self.resize(2 * self.capacity)
             for j in range(i, self.count):
-                if self.array[j] == self.array[self.count - 1]:
-                    self.array[self.count] = old
-                    self.count += 1
-                    if self.count == self.capacity:
-                        self.resize(2 * self.capacity)
+                self.array[j] = self.array[j - 1]
+                if j == i:
+                    self.array[j] = itm
                     return
-                old2 = self.array[j + 1]
-                self.array[j+1] = old
-                old = old2
-            return
 
     def delete(self, i):
         if self.array[i]:
@@ -63,20 +57,3 @@ class DynArray:
                     if self.count / self.capacity >= 2 and self.count > 16:
                         self.resize(self.capacity / 2)
                     return
-
-
-
-
-da = DynArray()
-for i in range(10):
-    da.append(i)
-    #print(da[i])
-
-
-#da.delete(1)
-da.insert(4, 7)
-
-for i in range(da.count):
-    print(da[i])
-
-#print(da.test_list())
