@@ -44,9 +44,10 @@ class DynArray:
             self.array[i] = itm
             for j in range(i, self.count):
                 if self.array[j] == self.array[self.count - 1]:
-                    self.resize(2 * self.capacity)
                     self.array[self.count] = old
                     self.count += 1
+                    if self.count == self.capacity:
+                        self.resize(2 * self.capacity)
                     return
                 old2 = self.array[j + 1]
                 self.array[j+1] = old
@@ -75,4 +76,7 @@ for i in range(10):
 #da.delete(1)
 da.insert(4, 7)
 
-print(da.test_list())
+for i in range(da.count):
+    print(da[i])
+
+#print(da.test_list())
