@@ -22,18 +22,19 @@ class Stack:
 # 4
 def brackets(str):
     stack = Stack()
-    counter = 0
     for i in range(len(str)):
-        stack.push(str[i])
-    while stack.size() > 0:
-        if stack.pop() == "(":
-            counter += 1
-        if stack.pop() == ")":
-            counter -= 1
-    if counter > 0:
+        if str[i] == "(":
+            stack.push(str[i])
+        if str[i] == ")":
+            if stack.size() == 0:
+                return False
+            else:
+                stack.pop()
+    if stack.size():
         return False
     else:
         return True
+
 
 # 1
 class Stack2:
@@ -56,6 +57,7 @@ class Stack2:
     def size(self):
         return len(self.stack)
 
+
 # 5
 def postfix(str):
     stack = Stack()
@@ -77,5 +79,6 @@ def postfix(str):
         if stack.peak() == "=":
             stack.pop()
             return stack2
+
 
 
